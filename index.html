@@ -3,20 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>የግዕዝ አገባብና ቅኔ - ዲያቆን ከውን ደጀን</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>ክ</text></svg>">
+    <meta name="description" content="የግዕዝ አገባብ፣ ቅኔ እና ሰዋሰው መዝገበ ዕውቀት። በዲያቆን ከውን ደጀን የተዘጋጀ።">
+    <meta name="keywords" content="ግዕዝ, ቅኔ, ሰዋሰው, አገባብ, Geez, Qene, Grammar, Ethiopia">
+    <meta name="author" content="ዲያቆን ከውን ደጀን">
     
-    <!-- Google Font ለሚያምር አማርኛ -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@400;700&display=swap" rel="stylesheet">
+    <title>ግዕዝ አገባብና ቅኔ - መዝገበ ዕውቀት</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@400;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #34495e;
-            --accent-color: #e67e22;
-            --text-color: #333;
-            --bg-color: #f4f7f6;
+            --primary-color: #0f2027; /* Deep Elegant Blue */
+            --secondary-color: #203a43;
+            --accent-color: #d4ac0d; /* Gold for Prestige */
+            --text-color: #2c3e50;
+            --bg-color: #f8f9fa;
+            --sidebar-width: 280px;
+            --card-shadow: 0 10px 20px rgba(0,0,0,0.08);
         }
+
+        body.dark-mode {
+            --primary-color: #000000;
+            --secondary-color: #1a1a1a;
+            --text-color: #ecf0f1;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+        }
+
+        * { box-sizing: border-box; outline: none; }
 
         body {
             font-family: 'Noto Serif Ethiopic', serif;
@@ -27,179 +45,272 @@
             height: 100vh;
             color: var(--text-color);
             overflow: hidden;
+            transition: all 0.3s ease;
         }
 
-        /* የግራ ምናሌ (Sidebar) */
+        /* SIDEBAR STYLING */
         .sidebar {
-            width: 300px;
-            background-color: var(--primary-color);
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
             color: white;
             display: flex;
             flex-direction: column;
-            border-right: 1px solid #1a252f;
-            transition: transform 0.3s ease;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.1);
             z-index: 1000;
+            transition: transform 0.3s ease;
         }
 
-        .sidebar-header {
-            padding: 20px;
+        .logo-section {
+            padding: 30px 20px;
             text-align: center;
-            background-color: #1a252f;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .sidebar-header h2 { margin: 0; font-size: 1.4rem; color: #fff; }
-        .sidebar-header p { margin: 5px 0 0; font-size: 0.85rem; color: #bdc3c7; }
-
-        /* የፍለጋ ሳጥን (Search Bar) */
-        .search-box {
-            padding: 10px 15px;
-            background: var(--secondary-color);
-        }
-        .search-box input {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
+        .logo-section h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            color: var(--accent-color);
             font-family: 'Noto Serif Ethiopic', serif;
-            outline: none;
-            box-sizing: border-box; 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
+        .logo-section p { font-size: 0.8rem; color: #ccc; margin-top: 5px; letter-spacing: 1px; }
+
+        /* Search Bar */
+        .search-container { padding: 15px; }
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50px;
+            padding: 8px 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s;
+        }
+        .search-box:focus-within { border-color: var(--accent-color); background: rgba(255,255,255,0.2); }
+        .search-box input {
+            border: none;
+            background: transparent;
+            color: white;
+            width: 100%;
+            margin-left: 10px;
+            font-family: inherit;
+        }
+        .search-box i { color: var(--accent-color); }
+
+        /* Menu List */
         .menu-list {
             flex: 1;
             overflow-y: auto;
-            padding-top: 10px;
+            padding: 10px 0;
         }
-        
-        /* ስክሮል ባር ማሳመሪያ */
-        .menu-list::-webkit-scrollbar { width: 6px; }
-        .menu-list::-webkit-scrollbar-thumb { background: #555; border-radius: 3px; }
+        .menu-list::-webkit-scrollbar { width: 5px; }
+        .menu-list::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; }
 
         .menu-item {
-            padding: 12px 20px;
+            padding: 15px 25px;
             cursor: pointer;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 0.95rem;
+            border-left: 4px solid transparent;
             transition: all 0.2s;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        .menu-item:hover { background-color: rgba(255,255,255,0.1); padding-left: 25px; }
+        .menu-item:hover { background: rgba(255,255,255,0.05); color: var(--accent-color); }
         .menu-item.active {
-            background-color: var(--accent-color);
+            background: rgba(255,255,255,0.1);
+            border-left-color: var(--accent-color);
             color: white;
             font-weight: bold;
-            border-left: 5px solid #fff;
         }
+        .menu-item i { font-size: 0.8rem; opacity: 0.5; }
 
-        .author-footer {
+        /* Bottom Links */
+        .bottom-links {
             padding: 15px;
-            background-color: #1a252f;
-            text-align: center;
-            font-size: 0.75rem;
-            color: #95a5a6;
-            border-top: 1px solid #34495e;
+            background: rgba(0,0,0,0.3);
+            font-size: 0.85rem;
         }
+        .bottom-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            transition: 0.3s;
+        }
+        .bottom-links a:hover { color: var(--accent-color); transform: translateX(5px); }
 
-        /* ዋናው መረጃ መታያ */
-        .content {
+        /* MAIN CONTENT */
+        .main-content {
             flex: 1;
-            padding: 20px;
-            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
             position: relative;
-            width: 100%;
         }
 
-        /* በሞባይል የምናሌ መክፈቻ */
-        .mobile-menu-btn {
-            display: none;
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: var(--primary-color);
-            color: white;
+        .top-bar {
+            padding: 15px 30px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        body.dark-mode .top-bar { background: #1a1a1a; color: white; }
+
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-color); }
+        body.dark-mode .menu-toggle { color: var(--accent-color); }
+
+        .theme-btn {
+            background: none;
             border: none;
-            padding: 10px;
-            border-radius: 5px;
+            font-size: 1.2rem;
             cursor: pointer;
-            z-index: 2000;
+            color: var(--primary-color);
+            transition: 0.3s;
+        }
+        body.dark-mode .theme-btn { color: var(--accent-color); }
+        .theme-btn:hover { transform: rotate(15deg); }
+
+        /* Content Area */
+        .scrollable-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
         }
 
         .card {
             background: white;
+            border-radius: 12px;
             padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             max-width: 900px;
             margin: 0 auto;
+            box-shadow: var(--card-shadow);
+            border-top: 5px solid var(--accent-color);
             min-height: 80vh;
         }
+        body.dark-mode .card { background: #1e1e1e; color: #ddd; }
 
-        h1 { color: var(--primary-color); border-bottom: 3px solid var(--accent-color); padding-bottom: 10px; }
-        
-        .intro-author {
-            background-color: #fcf3cf;
-            padding: 10px;
-            border-radius: 4px;
+        h1.page-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
             margin-bottom: 20px;
-            border-left: 4px solid var(--accent-color);
-            color: #7f6000;
-            font-weight: bold;
-            font-size: 0.9rem;
         }
+        body.dark-mode h1.page-title { color: var(--accent-color); border-color: #333; }
 
-        p { line-height: 1.8; font-size: 1.1rem; color: #444; }
+        .author-tag {
+            display: inline-block;
+            background: rgba(212, 172, 13, 0.15);
+            color: #9a7d0a;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+        body.dark-mode .author-tag { color: var(--accent-color); }
 
-        /* የሠንጠረዥ ዲዛይን */
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-        th { background-color: var(--primary-color); color: white; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-        tr:hover { background-color: #f1f1f1; }
+        p { line-height: 1.8; font-size: 1.1rem; }
 
-        /* ስልክ ላይ ሲሆን */
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin-top: 25px; overflow: hidden; border-radius: 8px; }
+        th { background-color: var(--primary-color); color: white; padding: 15px; text-align: left; }
+        td { padding: 15px; border-bottom: 1px solid #eee; }
+        tr:hover { background-color: #f9f9f9; }
+        
+        body.dark-mode td { border-color: #333; }
+        body.dark-mode tr:hover { background-color: #252525; }
+
+        /* AdSense Placeholders */
+        .ad-banner {
+            width: 100%;
+            height: 90px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.9rem;
+            margin: 20px 0;
+            border: 1px dashed #ccc;
+            border-radius: 5px;
+        }
+        body.dark-mode .ad-banner { background: #222; border-color: #444; }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .sidebar {
-                position: fixed;
-                height: 100%;
-                transform: translateX(-100%);
-            }
-            .sidebar.open { transform: translateX(0); }
-            .mobile-menu-btn { display: block; }
-            .content { padding-top: 60px; }
+            .sidebar { position: absolute; height: 100%; transform: translateX(-100%); }
+            .sidebar.active { transform: translateX(0); }
+            .menu-toggle { display: block; }
+            .scrollable-content { padding: 15px; }
             .card { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <button class="mobile-menu-btn" onclick="toggleSidebar()">☰ ማውጫ</button>
-
+    <!-- SIDEBAR -->
     <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h2>አገባብና ቅኔ</h2>
+        <div class="logo-section">
+            <h1>ግዕዝ ቅኔ</h1>
             <p>መዝገበ ዕውቀት</p>
         </div>
-        
-        <!-- የፍለጋ ሳጥን -->
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="ፈልግ... (ለምሳሌ፡ ቅኔ፣ ግስ)" onkeyup="filterMenu()">
+
+        <div class="search-container">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="ፈልግ..." onkeyup="filterMenu()">
+            </div>
         </div>
 
         <div class="menu-list" id="menuList">
-            <!-- ዝርዝሮች እዚህ ይገባሉ -->
+            <!-- Dynamic Menu Items -->
         </div>
 
-        <div class="author-footer">
-            አዘጋጅ<br>
-            <span style="color:#fff; font-weight:bold;">ዲያቆን ከውን ደጀን</span>
+        <div class="bottom-links">
+            <a href="about.html"><i class="fas fa-info-circle"></i> ስለ አፕሊኬሽኑ (About)</a>
+            <a href="privacy.html"><i class="fas fa-user-shield"></i> የግላዊነት መምሪያ (Privacy)</a>
+            <div style="margin-top: 15px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top:10px;">
+                <small>በዲያቆን ከውን ደጀን የተዘጋጀ</small>
+            </div>
         </div>
     </div>
 
-    <div class="content" onclick="closeSidebarOnMobile()">
-        <div class="card" id="mainContent">
-            <h1>እንኳን ደህና መጡ</h1>
-            <div class="intro-author">በዲያቆን ከውን ደጀን የተዘጋጀ</div>
-            <p>በግራ በኩል ያለውን ማውጫ በመጠቀም ወይም በመፈለጊያ ሳጥኑ በመጻፍ የሚፈልጉትን ርዕስ ይምረጡ።</p>
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <div class="top-bar">
+            <i class="fas fa-bars menu-toggle" onclick="toggleSidebar()"></i>
+            <div style="font-weight: bold; color: var(--accent-color);">ግዕዝ - የጥበብ መጀመሪያ</div>
+            <button class="theme-btn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+        </div>
+
+        <div class="scrollable-content" onclick="closeSidebarOnMobile()">
+            
+            <!-- Top Ad Unit -->
+            <div class="ad-banner">
+                <!-- እዚህ ጋር የ Google AdSense ኮድ ይገባል -->
+                Google AdSense Banner (970x90 or Responsive)
+            </div>
+
+            <div class="card" id="mainCard">
+                <h1 class="page-title">እንኳን ደህና መጡ</h1>
+                <div class="author-tag">አዘጋጅ፡ ዲያቆን ከውን ደጀን</div>
+                <p>ይህ አፕሊኬሽን የተዘጋጀው ለሊቃውንት፣ ለተማሪዎች እና ለግዕዝ ቋንቋ አፍቃሪያን ነው። በግራ በኩል ያለውን ማውጫ በመጠቀም ወይም በመፈለጊያ ሳጥኑ በመጻፍ የሚፈልጉትን ርዕስ ይምረጡ።</p>
+                <div style="text-align:center; margin-top:50px; opacity:0.5;">
+                    <i class="fas fa-book-open" style="font-size: 5rem;"></i>
+                </div>
+            </div>
+
+             <!-- Bottom Ad Unit -->
+             <div class="ad-banner">
+                <!-- እዚህ ጋር የ Google AdSense ኮድ ይገባል -->
+                Google AdSense Banner (Responsive)
+            </div>
         </div>
     </div>
 
@@ -3559,86 +3670,99 @@
     }
 ];
        const menuList = document.getElementById('menuList');
-        const mainContent = document.getElementById('mainContent');
+        const mainCard = document.getElementById('mainCard');
         const sidebar = document.getElementById('sidebar');
 
-        // መረጃውን መጫን
         function loadMenu(dataToLoad) {
             menuList.innerHTML = '';
             if(dataToLoad.length === 0) {
-                menuList.innerHTML = '<div style="padding:20px; text-align:center; color:#ccc">ምንም አልተገኘም</div>';
+                menuList.innerHTML = '<div style="padding:20px; text-align:center; color:rgba(255,255,255,0.5)">ምንም አልተገኘም</div>';
                 return;
             }
             dataToLoad.forEach((item) => {
                 const div = document.createElement('div');
                 div.className = 'menu-item';
-                div.innerText = item.title;
+                div.innerHTML = `<span>${item.title}</span> <i class="fas fa-chevron-right"></i>`;
                 div.onclick = () => {
                     displayContent(item);
                     closeSidebarOnMobile();
+                    // Mark as active
+                    document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                    div.classList.add('active');
                 };
                 menuList.appendChild(div);
             });
         }
 
-        // ይዘቱን ማሳየት
         function displayContent(item) {
             let tableRows = '';
             if(item.examples && item.examples.length > 0) {
                 item.examples.forEach(ex => {
                     tableRows += `<tr>
-                        <td style="font-weight:bold; color:#2c3e50;">${ex.verb}</td>
+                        <td style="font-weight:bold; color:var(--primary-color); width: 40%;">${ex.verb}</td>
                         <td>${ex.derived}</td>
                     </tr>`;
                 });
             }
 
-            const html = `
-                <h1>${item.title}</h1>
-                <div class="intro-author">በዲያቆን ከውን ደጀን የተዘጋጀ</div>
-                <p>${item.description}</p>
+            mainCard.innerHTML = `
+                <h1 class="page-title">${item.title}</h1>
+                <div class="author-tag">በዲያቆን ከውን ደጀን የተዘጋጀ</div>
+                <div class="description-box">
+                    <p>${item.description}</p>
+                </div>
                 ${tableRows ? `
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ርዕስ / ቃል</th>
-                            <th>ማብራሪያ / ትርጓሜ</th>
-                        </tr>
-                    </thead>
-                    <tbody>${tableRows}</tbody>
-                </table>` : ''}
+                <div style="overflow-x:auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ርዕስ / ቃል</th>
+                                <th>ማብራሪያ / ትርጓሜ</th>
+                            </tr>
+                        </thead>
+                        <tbody>${tableRows}</tbody>
+                    </table>
+                </div>` : ''}
             `;
             
-            mainContent.innerHTML = html;
-            window.scrollTo(0, 0); // ወደ ላይ መልስ
+            // Scroll to top
+            document.querySelector('.scrollable-content').scrollTop = 0;
         }
 
-        // የፍለጋ ተግባር
         function filterMenu() {
             const searchText = document.getElementById('searchInput').value.toLowerCase();
             const filteredData = grammarData.filter(item => 
                 item.title.toLowerCase().includes(searchText) || 
                 item.description.toLowerCase().includes(searchText) ||
-                (item.examples && item.examples.some(ex => 
-                    ex.verb.toLowerCase().includes(searchText) || 
-                    ex.derived.toLowerCase().includes(searchText)
-                ))
+                (item.examples && item.examples.some(ex => ex.verb.toLowerCase().includes(searchText)))
             );
             loadMenu(filteredData);
         }
 
-        // ሞባይል ላይ ምናሌ መክፈት/መዝጋት
-        function toggleSidebar() {
-            sidebar.classList.toggle('open');
-        }
-
-        function closeSidebarOnMobile() {
-            if (window.innerWidth <= 768) {
-                sidebar.classList.remove('open');
+        function toggleSidebar() { sidebar.classList.toggle('active'); }
+        function closeSidebarOnMobile() { if (window.innerWidth <= 768) { sidebar.classList.remove('active'); } }
+        
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector('.theme-btn i');
+            if(document.body.classList.contains('dark-mode')){
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
             }
         }
 
-        // መጀመሪያ ሲከፈት ሁሉንም አሳይ
+        // Check Local Storage for Theme
+        if(localStorage.getItem('theme') === 'dark'){ 
+            document.body.classList.add('dark-mode');
+            document.querySelector('.theme-btn i').classList.replace('fa-moon', 'fa-sun');
+        }
+
+        // Initialize
         loadMenu(grammarData);
 
     </script>
