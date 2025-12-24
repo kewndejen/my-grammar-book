@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>የግዕ አገባብ - ዲያቆን ከውን ደጀን</title>
+    <title>የግዕዝ/አማርኛ አገባብ - ዲያቆን ከውን ደጀን</title>
     <style>
         /* CSS Styling */
         body {
@@ -13,7 +13,7 @@
             background-color: #f4f4f9;
             display: flex;
             height: 100vh;
-            overflow: hidden; /* Prevent double scrollbars */
+            overflow: hidden; 
         }
         
         /* Sidebar Styling */
@@ -60,7 +60,6 @@
             border-left: 5px solid #f1c40f;
         }
         
-        /* Author Footer in Sidebar */
         .author-footer {
             padding: 15px;
             background-color: #1a252f;
@@ -117,7 +116,6 @@
             color: #444; 
         }
         
-        /* Example Box Styling */
         .example-box {
             background-color: #f8f9fa;
             border-left: 5px solid #3498db;
@@ -150,13 +148,12 @@
             background-color: #f2f6f8;
         }
 
-        /* Mobile Responsive */
         @media (max-width: 768px) {
             body { flex-direction: column; height: auto; overflow: auto; }
             .sidebar { width: 100%; height: auto; }
-            .menu-list { display: none; } /* Hide menu initially on mobile - simple version */
+            .menu-list { display: none; } 
             .menu-list.show { display: block; }
-            .sidebar-header { cursor: pointer; } /* Make header clickable to show menu */
+            .sidebar-header { cursor: pointer; } 
             .sidebar-header::after { content: ' (ምናሌን ለመክፈት ይጫኑ)'; font-size: 0.7rem; display: block;}
             .content { padding: 10px; }
             .card { padding: 20px; }
@@ -165,7 +162,6 @@
 </head>
 <body>
 
-    <!-- የግራ ምናሌ -->
     <div class="sidebar">
         <div class="sidebar-header" onclick="toggleMenu()">
             <h2>የዘር አወጣጥ</h2>
@@ -173,7 +169,6 @@
         </div>
         
         <div class="menu-list" id="menuList">
-            <!-- ዝርዝሮች በ JavaScript ይሞላሉ -->
         </div>
 
         <div class="author-footer">
@@ -182,7 +177,6 @@
         </div>
     </div>
 
-    <!-- ዋና ይዘት -->
     <div class="content">
         <div class="card" id="mainContent">
             <h1>እንኳን ደህና መጡ</h1>
@@ -202,7 +196,6 @@
     </div>
 
     <script>
-        // ዳታ (Data)
         const grammarData = [
             {
                 id: 1,
@@ -340,7 +333,6 @@
             }
         ];
 
-        // ዌብሳይቱ ሲከፈት የሚሰራ ተግባር
         const menuList = document.getElementById('menuList');
         const mainContent = document.getElementById('mainContent');
 
@@ -350,7 +342,6 @@
             div.innerText = item.title;
             div.onclick = () => {
                 loadContent(index);
-                // On mobile, hide menu after click
                 if(window.innerWidth <= 768) {
                     menuList.classList.remove('show');
                 }
@@ -360,8 +351,6 @@
 
         function loadContent(index) {
             const data = grammarData[index];
-            
-            // የሠንጠረዥ አሰራር
             let tableRows = '';
             data.examples.forEach(ex => {
                 tableRows += `<tr><td>${ex.verb}</td><td>${ex.derived}</td></tr>`;
@@ -386,10 +375,7 @@
                     </table>
                 </div>
             `;
-            
             mainContent.innerHTML = html;
-
-            // Active class ማስተካከል
             const items = document.querySelectorAll('.menu-item');
             items.forEach(i => i.classList.remove('active'));
             items[index].classList.add('active');
